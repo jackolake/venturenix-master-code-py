@@ -1,0 +1,6 @@
+google-cloud-storage==2.14.0
+ntplib==0.4.0
+pandas==2.2.0
+pip-chill==1.0.3
+psutil==5.9.8
+pyinstrument==4.6.2

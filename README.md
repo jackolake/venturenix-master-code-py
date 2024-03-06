@@ -21,7 +21,7 @@ git clone git@github.com:hfvtx/venturenix-master-code-py.git
 3. Environment is properly setup
 ```bash
 cd venturenix-master-code-py
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 4. Try to run the code and see if it runs successfully
 ```bash
@@ -55,7 +55,7 @@ Uploading files at Thu Mar  7 01:03:29 2024
 ```
 If you install new libraries into the environment, please ensure to update `requirements.txt` before submission or the scoring process will fail.
 ```bash
-pip freeze > requirements.txt
+pip3 freeze > requirements.txt
 ```
 __When time is up, the service account will be disabled and submission will fail. Please make sure to submit before time__
 
