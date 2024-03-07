@@ -20,7 +20,7 @@ for f in required_files:
 
 # get private_key digest
 with open('private_key', "rb") as f:
-    userid = hashlib.file_digest(f, "sha1").hexdigest()
+    userid = hashlib.sha1(f.read()).hexdigest()
 
 # Check time diff with NTP
 ntpc = ntplib.NTPClient()

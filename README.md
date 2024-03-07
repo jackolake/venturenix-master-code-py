@@ -23,10 +23,14 @@ git clone git@github.com:hfvtx/venturenix-master-code-py.git
 cd venturenix-master-code-py
 pip3 install -r requirements.txt
 ```
+Note: If you downloaded the source via http, the folder may have a different name such as `venturenix-master-code-py-main`
+
 4. Try to run the code and see if it runs successfully
 ```bash
 python3 main.py
-
+```
+*Output*
+```
 Running answers...
 Benchmarking...
 
@@ -47,10 +51,24 @@ In order to submit your code, you need to download 2 files separately. __Please 
 
    URL will be provided to the participants onsite.
 
+The folder should look like this when you submit:
+```bash
+README.md
+__pycache__
+main.py
+module.py
+private_key
+python-contest-submission.json
+requirements.txt
+submit.py
+```
+
 Once both files are in place, you could submit your code with the following command.
 ```bash
 python3 submit.py
-
+```
+*Output*
+```
 Uploading files at Thu Mar  7 01:03:29 2024
 ```
 If you install new libraries into the environment, please ensure to update `requirements.txt` before submission or the scoring process will fail.
