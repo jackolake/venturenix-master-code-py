@@ -36,10 +36,10 @@ Benchmarking...
 
 Reference
 ---------
-Memory usage: 2601.18125Mb
-Average CPU: 0.45545
-Benchmark CPU time: 2.911
-Final Score (reference only): 416743.72804
+Memory usage: 3231.6875 Mb
+Average runtime: 4.44479
+Benchmark CPU time: 2.9586
+Final Score (reference only): 4971578.59052
 ```
 
 ### Code Submission
@@ -71,7 +71,7 @@ python3 submit.py
 ```
 Uploading files at Thu Mar  7 01:03:29 2024
 ```
-If you install new libraries into the environment, please ensure to update `requirements.txt` before submission or the scoring process will fail.
+> If you install new libraries into the environment, please ensure to update `requirements.txt` before submission or the scoring process will fail.
 ```bash
 pip3 freeze > requirements.txt
 ```

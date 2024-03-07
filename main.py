@@ -4,6 +4,8 @@ main.py: the runner
 *** DO NOT CHANGE ANYTHING IN THIS FILE ***
 """
 import psutil
+import platform
+from resource import getrusage, RUSAGE_SELF
 from pyinstrument import Profiler
 from module import answer1, answer2, answer3
 import gc
@@ -16,25 +18,36 @@ memory_usage: dict[float] = dict()
 durations: dict[float] = dict()
 cpu_time: dict[float] = dict()
 
+seed: int = 888888
+answer1_assert: float = 17178313184.68749
+
+def peak_mem():
+  if platform.system() == 'Linux':
+    return(getrusage(RUSAGE_SELF).ru_maxrss/1024)
+  elif platform.system() == 'Windows':
+    return(psutil.Process().memory_info().peak_wset / (1024*1024))
+  elif platform.system() == 'Darwin':
+    return(getrusage(RUSAGE_SELF).ru_maxrss/(1024*1024))
+
 print("Running answers...")
 gc.collect()
 profiler = Profiler()
 for i in range(num_of_runs):
     profiler.start()
     # Participant code starts
-    a = answer1(4)
+    assert answer1(seed)==answer1_assert, "function answer1 is incorrect"
     b = answer2(4)
     c = answer3(4)
     # Participant code ends
     profiler.stop()
-    memory_usage[i] = psutil.Process().memory_info().rss / (1024*1024)
+    memory_usage[i] = peak_mem()
     durations[i] = profiler.last_session.duration
     cpu_time[i] = profiler.last_session.cpu_time
     profiler.reset()
-    del(a, b, c)
+    del(b, c)
     gc.collect()
 memory_usage_avg = round(sum([memory_usage[i] for i in valid_runs])/len(valid_runs),5)
-cpu_time_avg = round(sum([cpu_time[i] for i in valid_runs])/len(valid_runs),5)
+durations_avg = round(sum([durations[i] for i in valid_runs])/len(valid_runs),5)
 
 # Using Pi as benchmark function
 def cpu_benchmarking() -> None:
@@ -62,7 +75,7 @@ def cpu_benchmarking() -> None:
 
 print("Benchmarking...")
 cpu_benchmark = cpu_benchmarking()
-final_score = round(memory_usage_avg*1024 * (cpu_time_avg / cpu_benchmark),5)
+final_score = round(memory_usage_avg*1024 * (durations_avg / cpu_benchmark),5)
 print("\nReference\n---------")
-print(f"Memory usage: {memory_usage_avg}Mb\nAverage CPU: {cpu_time_avg}\nBenchmark CPU time: {cpu_benchmark}")
+print(f"Memory usage: {memory_usage_avg} Mb\nAverage runtime: {durations_avg}\nBenchmark CPU time: {cpu_benchmark}")
 print(f"Final Score (reference only): {final_score}")
