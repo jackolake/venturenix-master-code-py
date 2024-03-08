@@ -11,15 +11,25 @@ from module import answer1, answer2, answer3
 import gc
 import time
 
-num_of_runs: int = 7
-valid_runs: list[int] = [1,2,3,4,5]
+num_of_runs: int = 5
+valid_runs: list[int] = [1,2,3]
 
 memory_usage: dict[float] = dict()
 durations: dict[float] = dict()
 cpu_time: dict[float] = dict()
 
+# Question 1
 seed: int = 888888
 answer1_assert: float = 17178313184.68749
+
+# Question 2
+with open('q2.txt', 'r') as fp:
+  q2_text = fp.read()
+answer2_assert: tuple[int,int] = (32,5632)
+
+# Question 3
+url = 'https://www.gov.hk/tc/residents/'
+answer3_assert: set[str] = set(['管制即棄塑膠', '公屋富戶', '垃圾收費', '財政預算案'])
 
 def peak_mem():
   if platform.system() == 'Linux':
@@ -36,15 +46,14 @@ for i in range(num_of_runs):
     profiler.start()
     # Participant code starts
     assert answer1(seed)==answer1_assert, "function answer1 is incorrect"
-    b = answer2(4)
-    c = answer3(4)
+    assert answer2(q2_text)==answer2_assert, "function answer2 is incorrect"
+    assert answer3(url)==answer3_assert, "function answer3 is incorrect"
     # Participant code ends
     profiler.stop()
     memory_usage[i] = peak_mem()
     durations[i] = profiler.last_session.duration
     cpu_time[i] = profiler.last_session.cpu_time
     profiler.reset()
-    del(b, c)
     gc.collect()
 memory_usage_avg = round(sum([memory_usage[i] for i in valid_runs])/len(valid_runs),5)
 durations_avg = round(sum([durations[i] for i in valid_runs])/len(valid_runs),5)
