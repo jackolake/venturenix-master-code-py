@@ -22,9 +22,9 @@ Convert the double-width numbers (i.e. 0-9) in the given Japanese text and retur
 Reference implementation is not given.
 """
 def answer2(t: str) -> tuple[int, int]:
-    count_dw_numbers: int = 0
-    sum_dw_numbers: int = 0
-    return((32, 5632))
+    count_dw_numbers: int = 32
+    sum_dw_numbers: int = 5632
+    return((count_dw_numbers, sum_dw_numbers))
 
 """
 Question 3)
