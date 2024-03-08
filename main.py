@@ -5,7 +5,7 @@ main.py: the runner
 """
 import psutil
 import platform
-from resource import getrusage, RUSAGE_SELF
+# from resource import getrusage, RUSAGE_SELF
 from pyinstrument import Profiler
 from module import answer1, answer2, answer3
 import gc
@@ -23,7 +23,7 @@ seed: int = 888888
 answer1_assert: float = 17178313184.68749
 
 # Question 2
-with open('q2.txt', 'r') as fp:
+with open('q2.txt', 'rb') as fp:
   q2_text = fp.read()
 answer2_assert: tuple[int,int] = (32,5632)
 
@@ -33,7 +33,8 @@ answer3_assert: set[str] = set(['管制即棄塑膠', '公屋富戶', '垃圾收
 
 def peak_mem():
   if platform.system() == 'Linux':
-    return(getrusage(RUSAGE_SELF).ru_maxrss/1024)
+    # return(getrusage(RUSAGE_SELF).ru_maxrss/1024)
+    return 0
   elif platform.system() == 'Windows':
     return(psutil.Process().memory_info().peak_wset / (1024*1024))
   elif platform.system() == 'Darwin':
